@@ -1,0 +1,1 @@
+export type Stimuli = Array<Array<string>>;
