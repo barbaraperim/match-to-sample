@@ -24,8 +24,6 @@ export class GameComponent implements OnInit {
 
   useDefault = true;
 
-  isFeedbackModalOpen = false;
-
   routine: Routine = [];
   stimuli: Stimuli = [];
 
@@ -38,6 +36,8 @@ export class GameComponent implements OnInit {
 
   currentPhaseIndex = 0;
   currentStepIndex = 0;
+
+  error = true;
 
 
   constructor(public dialog: MatDialog) {}  
@@ -80,16 +80,6 @@ export class GameComponent implements OnInit {
     this.optionImages = optionImages;
   }
 
-  openFeedbackModal(): void {
-    if (!this.isFeedbackModalOpen) {
-      this.feedbackModal.toggle();
-    }
-    else {
-      this.feedbackModal.toggle();
-    }
-    this.isFeedbackModalOpen = !this.isFeedbackModalOpen;
-  }
-
   updateCurrentPhaseIndex(): void {
     if (this.currentPhaseIndex < this.routine.length){
       this.currentPhaseIndex++;
@@ -118,9 +108,12 @@ export class GameComponent implements OnInit {
       console.log('optionsStartPosition '+ this.currentSteps[this.currentStepIndex].optionsStartPosition);
       
       
-      if (imageClicked === this.currentSteps[this.currentStepIndex].optionsStartPosition) {
-        this.openFeedbackModal()
+      if (imageClicked === this.currentSteps[this.currentStepIndex].optionsCorrectPosition) {
+        this.error = false;
+      } else {
+        this.error = true;
       }
+      this.feedbackModal.toggle();
     }
     this.updateCurrentStepIndex();
 
@@ -148,9 +141,11 @@ export class GameComponent implements OnInit {
           sampleClass: sampleClass,
           optionsCategory: phase.optionsCategory,
           // REVISAR LINHA ABAIXO
-          optionsStartPosition: z,
-          optionsCorrectPosition: (z+sampleClass)%this.numOfClasses
+          optionsStartPosition: i,
+          optionsCorrectPosition: z
         });
+
+        console.log('correctPosition  ', (i+sampleClass)%this.numOfClasses);
       }
     }    
 

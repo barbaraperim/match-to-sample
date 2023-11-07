@@ -10,27 +10,15 @@
     
       
       <app-feedback-modal #modal>
-        <h1>Lorem, ipsum dolor.</h1>
-        <p>
-          Lorem ipsum, dolor sit amet
-          consectetur adipisicing elit.
-          Earum dicta non alias distinctio,
-          aliquid aperiam ipsum provident
-          quae nihil voluptatibus veniam
-          fuga similique facilis consequatur
-          reiciendis recusandae. Velit magni
-          distinctio corporis eaque ad itaque
-          ex impedit accusamus. Debitis pariatur
-          cum quam rerum reprehenderit quod
-          iure, in explicabo facere vero nemo?
-        </p>
+
+        <h1 *ngIf="!error"> Correto!  </h1>
+        <h1 *ngIf="error"> Incorreto  </h1>
+
         
-        <button
+        <!-- button
           (click)="acaoPrimaria(); modal.toggle();"
-          class="btn-primario">Ação</button>
+          class="btn-primario">Ação</button-->
       
-        <button
-          class="btn-secundario">Ação 2</button>
       </app-feedback-modal> 
 
 </div>
